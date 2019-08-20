@@ -66,7 +66,7 @@ public class TuitionControllerTest {
         boolean instate = true;
         boolean underGrad = false;
 
-        when(service.calculateTuition(studentId, major, instate,underGrad)).thenReturn(null);
+        when(service.calculateTuition(studentId, major, instate,underGrad)).thenThrow(new NullPointerException("Null pointer exception"));
         this.mockMvc.perform(get("/cost/38733/java")
         .param("inState", "true")
         .param("undergraduate", "false"))

@@ -45,6 +45,7 @@ public class CalculatorServiceTest {
         assertEquals(expected, fromService);
     }
 
+
     private void setUpFinancialAidMock() {
         financialAidService = mock(FinancialAidService.class);
 
