@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.booleanThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -54,6 +55,22 @@ public class TuitionControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json(outputJson));
 
+
+    }
+
+    @Test
+    public void testfor404() throws Exception{
+
+        String studentId = "38733";
+        String major = "java";
+        boolean instate = true;
+        boolean underGrad = false;
+
+        when(service.calculateTuition(studentId, major, instate,underGrad)).thenReturn(null);
+        this.mockMvc.perform(get("/cost/38733/java")
+        .param("inState", "true")
+        .param("undergraduate", "false"))
+        .andDo(print()).andExpect(status().isNotFound());
 
     }
 }
